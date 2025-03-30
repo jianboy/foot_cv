@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+* @Description: footutil
+* @Date: 2025年03月30日 Sunday
+* @Author liuyuqi.gov@msn.
+*/
 public class FootUtil {
 
     // 浮雕效果

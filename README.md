@@ -1,31 +1,36 @@
-# 足底纹理生成器 (Foot Pattern Generator)
+# Foot Pattern Generator
 
-这个Java程序使用OpenCV处理足底图像并生成具有足底纹理的金色足印图像。
+This Java program uses OpenCV to process foot images and generate a golden footprint image with foot texture.
 
-## 项目描述
+![alt text](screenshot/1.png) ![alt text](screenshot/2.png)
 
-该项目读取足底图像，从背景中分离出足底，然后创建带有清晰足底纹理的金色图案。
+## Project Description
 
-## 功能特点
+The project reads foot images, separates the foot from the background, and creates a golden pattern with clear foot texture.
 
-- 高级足底检测与分割
-- 背景移除
-- 足底纹理增强与保留
-- 金色足印生成
-- 圆形背景设计
+## Features
 
-## 如何构建与运行
+- Advanced foot detection and segmentation
+- Background removal
+- Enhanced and preserved foot texture
+- Golden footprint generation
+- Circular background design
 
-1. 确保安装了Java 11+和Maven
-2. 构建项目：`mvn clean package`
-3. 运行程序：`mvn exec:java`
+## How to Build and Run
 
-程序将：
-1. 读取输入图像：`/workspace/foot_cv/1.png`
-2. 处理图像生成足底纹理图案
-3. 保存结果到：`/workspace/foot_cv/result.png`
+1. Ensure that Java 11+ and Maven are installed.
+2. Build the project: `mvn clean package`
+3. Run the program: `mvn exec:java`
 
-## 依赖
+The program will:
+1. Read the input image: `/workspace/foot_cv/1.png`
+2. Process the image to generate a foot texture pattern
+3. Save the result to: `/workspace/foot_cv/result.png`
 
-- OpenCV 4.5.1-2 (通过org.openpnp:opencv)
+## Dependencies
 
+- OpenCV 4.5.1-2 (via org.openpnp:opencv)
+
+## License
+
+apache 2.0
