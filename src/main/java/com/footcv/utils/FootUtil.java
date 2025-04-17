@@ -40,9 +40,9 @@ public class FootUtil {
 
         // 定义浮雕卷积核
         Mat kernel = new Mat(3, 3, CvType.CV_32F);
-        kernel.put(0, 0, -6, -4, 0);
-        kernel.put(1, 0, -4, 1, 4);
-        kernel.put(2, 0, 0, 4, 6);
+        kernel.put(0, 0, -10, -8, 0);
+        kernel.put(1, 0, -8, 1, 8);
+        kernel.put(2, 0, 0, 8, 10);
 
         // 应用滤波
         Mat embossed = new Mat();
@@ -57,7 +57,7 @@ public class FootUtil {
         Imgproc.cvtColor(embossed, embossedBGR, Imgproc.COLOR_GRAY2BGR);
 
         // 设置前景色和背景色
-        Scalar foregroundColor = new Scalar(127, 196, 210); // 金黄色
+        Scalar foregroundColor = new Scalar(111, 193, 222); // 金黄色
         Scalar backgroundColor = new Scalar(0, 0, 0);       // 黑色
 
 //        Mat embossedColor = new Mat(embossedBGR.size(), embossedBGR.type());

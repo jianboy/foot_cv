@@ -18,11 +18,12 @@ public class FootProcessor {
     }
 
     public static void main(String[] args) {
-
+        
+        String file_path = "/workspace/foot_cv_java/";
         // Load the input image
-        String inputImagePath = "F:\\workspace\\foot_cv\\docs\\foot_cv\\01_foreground.png";
-        String outputImagePath = "F:\\workspace\\foot_cv\\docs\\foot_cv\\resul00t2.png";
-        String backendImagePath ="F:\\workspace\\foot_cv\\docs\\foot_cv\\background.png";
+        String inputImagePath = file_path + "01_foreground.png";
+        String outputImagePath = file_path + "result00t2.png";
+        String backendImagePath = file_path + "background.png";
 
         Mat srcImage = Imgcodecs.imread(inputImagePath, Imgcodecs.IMREAD_UNCHANGED);
         Mat backgroundImage = Imgcodecs.imread(backendImagePath, Imgcodecs.IMREAD_UNCHANGED);
