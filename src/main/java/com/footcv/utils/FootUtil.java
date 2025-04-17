@@ -99,7 +99,6 @@ public class FootUtil {
         Mat bgr = new Mat(image.rows(), image.cols(), CvType.CV_8UC3);
         Mat alpha = bgrAlpha.get(3);
 
-
         // 合并BGR通道
         Core.merge(bgrAlpha.subList(0, 3), bgr);
         // 定义黑色阈值范围
@@ -108,18 +107,47 @@ public class FootUtil {
         // 创建黑色掩码
         Mat blackMask = new Mat();
         Core.inRange(bgr, lowerBlack, upperBlack, blackMask);
-
-        // 将黑色区域的 Alpha 设置为 0 (透明)
-        for (int i = 0; i < alpha.rows(); i++) {
-            for (int j = 0; j < alpha.cols(); j++) {
-                if (blackMask.get(i, j)[0] > 0) {
-                    alpha.put(i, j, 0); // 设置透明度为0
+        
+        double blackRatio = Core.countNonZero(blackMask) / (double)(blackMask.rows() * blackMask.cols());
+        System.out.println("黑色区域占比: " + (blackRatio * 100) + "%");
+        
+        Mat modifiedBgr = bgr.clone();
+        
+        if (blackRatio > 0.5) {
+            Scalar yellowColor = new Scalar(111, 193, 222);  // 黄色 (BGR格式)
+            modifiedBgr.setTo(yellowColor, blackMask);
+            
+            // 将其他区域的 Alpha 设置为 0 (透明)
+            Mat nonBlackMask = new Mat();
+            Core.bitwise_not(blackMask, nonBlackMask);
+            
+            for (int i = 0; i < alpha.rows(); i++) {
+                for (int j = 0; j < alpha.cols(); j++) {
+                    if (nonBlackMask.get(i, j)[0] > 0) {
+                        alpha.put(i, j, 0); 
+                    }
+                }
+            }
+        } else {
+            // 将黑色区域的 Alpha 设置为 0 (透明)
+            for (int i = 0; i < alpha.rows(); i++) {
+                for (int j = 0; j < alpha.cols(); j++) {
+                    if (blackMask.get(i, j)[0] > 0) {
+                        alpha.put(i, j, 0); 
+                    }
                 }
             }
         }
-        // 合并BGR和更新后的Alpha通道
-        List<Mat> resultChannels = new ArrayList<Mat>(bgrAlpha);
-        resultChannels.set(3, alpha);
+        
+        List<Mat> modifiedChannels = new ArrayList<Mat>();
+        Core.split(modifiedBgr, modifiedChannels);
+        
+        List<Mat> resultChannels = new ArrayList<Mat>();
+        resultChannels.add(modifiedChannels.get(0)); // B channel
+        resultChannels.add(modifiedChannels.get(1)); // G channel
+        resultChannels.add(modifiedChannels.get(2)); // R channel
+        resultChannels.add(alpha);                   // Alpha channel
+        
         Mat result = new Mat();
         Core.merge(resultChannels, result);
 
